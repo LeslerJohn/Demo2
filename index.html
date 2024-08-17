@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.8s ease;
+        }
+
+        #figure {
+            height: 60px;
+            background-size: cover;
+        }
+
+        .animate {
+            animation: rotate 4s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .title {
+            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 10rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="page">
+            <h1 class="title">Try and catch me.</h1>
+            <div class="container" id="container">
+                <img src="icons8-pencil.svg" alt="" id="figure" class="animate">
+            </div>
+        </section>
+    </main>
+    <script>
+        const container = document.getElementById('container');
+        const figure = document.getElementById('figure');
+        const page = document.querySelector('.page');
+        
+        function getRandomPosition(maxWidth, maxHeight) {
+            const x = Math.random() * (maxWidth - container.clientWidth);
+            const y = Math.random() * (maxHeight - container.clientHeight);
+            return { x, y };
+        }
+
+        figure.addEventListener('mouseover', function() {
+            const pageWidth = page.clientWidth;
+            const pageHeight = page.clientHeight;
+            const newPosition = getRandomPosition(pageWidth, pageHeight);
+
+            container.style.left = `${newPosition.x}px`;
+            container.style.top = `${newPosition.y}px`;
+        });
+    </script>
+</body>
+</html>
